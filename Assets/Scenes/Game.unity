@@ -384,7 +384,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2046263109}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 8.61, y: -3.61, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -407,6 +407,9 @@ MonoBehaviour:
   verticalInput: 0
   _laserPrefab: {fileID: 5539472664609245754, guid: ff29026238524ba42b9860e6e71526db,
     type: 3}
+  _laserSpawnOffsetX: 0
+  _laserSpawnOffsetY: 0.75
+  _fireRate: 0.2
 --- !u!1001 &7970417648464211863
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -422,7 +425,7 @@ PrefabInstance:
     - target: {fileID: 4635090249280500798, guid: ff29026238524ba42b9860e6e71526db,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 4635090249280500798, guid: ff29026238524ba42b9860e6e71526db,
         type: 3}

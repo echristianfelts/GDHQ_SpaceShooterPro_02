@@ -10,12 +10,21 @@ public class Player : MonoBehaviour
     public float verticalInput;
     [SerializeField]
     private GameObject _laserPrefab;
+    [SerializeField]
+    private float _laserSpawnOffsetX = 0f;
+    [SerializeField]
+    private float _laserSpawnOffsetY = 0.75f;
+    [SerializeField]
+    private float _fireRate = 2.0f;
+    private float _fireTime = -1f;
+
 
     // Start is called before the first frame update
     void Start()
     {
         // take current pos and assign start pos.
         transform.position = new Vector3(0, 0, 0);
+
     }
 
     // Update is called once per frame
@@ -24,15 +33,12 @@ public class Player : MonoBehaviour
 
         CalculateMovement();
 
-        // ifg I hit the space key...
+        // if I hit the space key...
         // Spawn a laser shot.
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && _fireTime < Time.time)
         {
-            Debug.Log("Space Key Pressed");
-
-            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
-
+            FireLaser();
         }
 
 
@@ -67,5 +73,15 @@ public class Player : MonoBehaviour
         {
             transform.position = new Vector3(10f, transform.position.y, 0);
         }
+    }
+
+    void FireLaser()
+    {
+        Debug.Log("Space Key Pressed");
+        Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
+        _fireTime = Time.time + _fireRate;
+
+        Instantiate(_laserPrefab, transform.position + laserSpawnOffset, Quaternion.identity);
+
     }
 }
