@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
     private float _playerSpeed = 5.5f;
     public float horizontalInput;
     public float verticalInput;
+    [SerializeField]
+    private GameObject _laserPrefab;
 
     // Start is called before the first frame update
     void Start()
@@ -19,38 +21,51 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        CalculateMovement();
+
+        // ifg I hit the space key...
+        // Spawn a laser shot.
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            Debug.Log("Space Key Pressed");
+
+            Instantiate(_laserPrefab, transform.position, Quaternion.identity);
+
+        }
+
+
+
+    }
+
+    void CalculateMovement()
+    {
+
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         Vector3 playerVector = new Vector3(horizontalInput, verticalInput, 0);
-        transform.Translate(playerVector * Time.deltaTime * _playerSpeed); 
+        transform.Translate(playerVector * Time.deltaTime * _playerSpeed);
 
-        //if player y > than 0
-        //then y = 0
-        //if player x < -11
-        //then x = 11
-        //if x > 11
-        //then x = -11
+
 
         if (transform.position.y > 0)
         {
             transform.position = new Vector3(transform.position.x, 0, 0);
 
-        } else if (transform.position.y <-4)
+        }
+        else if (transform.position.y < -3.8f)
         {
-            transform.position = new Vector3(transform.position.x, -4, 0);
+            transform.position = new Vector3(transform.position.x, -3.8f, 0);
         }
 
-        if (transform.position.x > 10.5)
+        if (transform.position.x > 10f)
         {
-            transform.position = new Vector3(-10, transform.position.y, 0);
+            transform.position = new Vector3(-10f, transform.position.y, 0);
         }
-        else if (transform.position.x < -10.5)
+        else if (transform.position.x < -10f)
         {
-            transform.position = new Vector3(10, transform.position.y, 0);
+            transform.position = new Vector3(10f, transform.position.y, 0);
         }
-
-
-
-
     }
 }
