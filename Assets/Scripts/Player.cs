@@ -17,6 +17,10 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _fireRate = 2.0f;
     private float _fireTime = -1f;
+    [SerializeField]
+    private float _healthPointsPlayer = 100f;
+    [SerializeField]
+    private float _enemyImpactDamage = 20f;
 
 
     // Start is called before the first frame update
@@ -82,6 +86,19 @@ public class Player : MonoBehaviour
         _fireTime = Time.time + _fireRate;
 
         Instantiate(_laserPrefab, transform.position + laserSpawnOffset, Quaternion.identity);
+
+    }
+
+    public void Damage()
+    {
+        _healthPointsPlayer -= _enemyImpactDamage;
+        if (_healthPointsPlayer <= 0)
+        {
+            //communicate with Spawn Manager
+            //SpawnManager spawnManager = //Find the Game Object.  Get the componenet;
+            Destroy(this.gameObject);
+        }
+        Debug.Log("Player Hitpoints: " + _healthPointsPlayer);
 
     }
 }
