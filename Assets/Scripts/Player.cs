@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
     private float _healthPointsPlayer = 100f;
     [SerializeField]
     private float _enemyImpactDamage = 20f;
+    private SpawnManager _spawnManager;
 
 
     // Start is called before the first frame update
@@ -28,6 +29,15 @@ public class Player : MonoBehaviour
     {
         // take current pos and assign start pos.
         transform.position = new Vector3(0, 0, 0);
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
+
+        if (_spawnManager == null )
+        {
+            Debug.LogError("Spawn Manager is currently NULL.");
+
+        }
+
+
 
     }
 
@@ -95,7 +105,7 @@ public class Player : MonoBehaviour
         if (_healthPointsPlayer <= 0)
         {
             //communicate with Spawn Manager
-            //SpawnManager spawnManager = //Find the Game Object.  Get the componenet;
+            _spawnManager.OnPlayerDeath(); //Find the Game Object.  Get the componenet;
             Destroy(this.gameObject);
         }
         Debug.Log("Player Hitpoints: " + _healthPointsPlayer);

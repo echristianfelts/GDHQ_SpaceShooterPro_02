@@ -17,7 +17,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -54,8 +54,9 @@ public class Enemy : MonoBehaviour
             Player playerTest = other.transform.GetComponent<Player>();
             //if (playerTest != null) // If that thing desn't NOT exist.  Null Check.
             //{
-                playerTest.Damage();
                 Debug.Log("TAG TRIGGER PLAYER");
+                playerTest.Damage();
+                Destroy(this.gameObject);
             //}
         }
 
@@ -64,9 +65,9 @@ public class Enemy : MonoBehaviour
         // Destroy Self
         if (other.tag == "Laser")
         {
+            Debug.Log("TAG TRIGGER LASER");
             float randomXval = Random.Range(_xRangeMin, _xRangeMax);
             Instantiate(this.gameObject, new Vector3(randomXval, 6.5f, 0f), Quaternion.identity);
-            Debug.Log("TAG TRIGGER LASER");
             Destroy(other.gameObject);
             Destroy(this.gameObject);
 
