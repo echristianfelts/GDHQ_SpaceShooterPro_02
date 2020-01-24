@@ -52,7 +52,7 @@ public class Enemy : MonoBehaviour
         {
 
             Player playerTest = other.transform.GetComponent<Player>();
-            if (playerTest != null)
+            if (playerTest != null) // If that thing desn't NOT exist.  Null Check.
             {
                 playerTest.Damage();
                 Debug.Log("TAG TRIGGER PLAYER");
