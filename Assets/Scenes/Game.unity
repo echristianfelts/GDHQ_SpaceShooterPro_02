@@ -213,6 +213,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50.000004, y: 13.775001, z: 0}
+--- !u!1 &1523913259
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1523913261}
+  - component: {fileID: 1523913260}
+  m_Layer: 0
+  m_Name: Spawn_Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1523913260
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523913259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6afc3e64ac44db40b155d7a2f8349b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  waitTime: 1
+  _enemyPrefab: {fileID: 4764705624836747697, guid: fd38c43f7d8a82343b2e912ec08c8420,
+    type: 3}
+  xSpawnOffsetRange: 5
+--- !u!4 &1523913261
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1523913259}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.62411594, y: 1.5838223, z: 2.9401178}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1901882657
 GameObject:
   m_ObjectHideFlags: 0
@@ -311,7 +358,7 @@ GameObject:
   - component: {fileID: 2046263114}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -410,6 +457,8 @@ MonoBehaviour:
   _laserSpawnOffsetX: 0
   _laserSpawnOffsetY: 0.75
   _fireRate: 0.2
+  _healthPointsPlayer: 100
+  _enemyImpactDamage: 20
 --- !u!1001 &5043410122483997887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -425,7 +474,7 @@ PrefabInstance:
     - target: {fileID: 6642553585245337184, guid: fd38c43f7d8a82343b2e912ec08c8420,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.03
+      value: 0.16
       objectReference: {fileID: 0}
     - target: {fileID: 6642553585245337184, guid: fd38c43f7d8a82343b2e912ec08c8420,
         type: 3}
