@@ -11,6 +11,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private GameObject _laserPrefab;
     [SerializeField]
+    private GameObject _tripleShotPrefab;
+    [SerializeField]
     private float _laserSpawnOffsetX = 0f;
     [SerializeField]
     private float _laserSpawnOffsetY = 0.75f;
@@ -22,6 +24,16 @@ public class Player : MonoBehaviour
     [SerializeField]
     private float _enemyImpactDamage = 20f;
     private SpawnManager _spawnManager;
+    [SerializeField]
+    private bool _powerUpTripleShot = false;
+
+    //is Tripleshot active?
+    //
+
+
+
+
+
 
 
     // Start is called before the first frame update
@@ -52,10 +64,24 @@ public class Player : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space) && _fireTime < Time.time)
         {
-            FireLaser();
+
+            if (_powerUpTripleShot == true)
+            {
+
+                FireTripleShot();
+            }
+            else
+            {
+                FireLaser();
+            }
         }
 
+        // instasiate trippleshot
 
+        //if spacekey pressed...
+        // AND if trippleshot is true...
+        // fire trippleshot.
+        //else fire singleshot.
 
     }
 
@@ -91,11 +117,21 @@ public class Player : MonoBehaviour
 
     void FireLaser()
     {
-        Debug.Log("Space Key Pressed");
+        Debug.Log("Space Key Pressed Single");
         Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
         _fireTime = Time.time + _fireRate;
 
         Instantiate(_laserPrefab, transform.position + laserSpawnOffset, Quaternion.identity);
+
+    }
+
+    void FireTripleShot()
+    {
+        Debug.Log("Space Key Pressed Triple");
+        //Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
+        _fireTime = Time.time + _fireRate;
+
+        Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
 
     }
 
