@@ -26,18 +26,14 @@ public class PowerUp : MonoBehaviour
 
     }
 
-    // onTriggerEnter
     void OnTriggerEnter2D(Collider2D other)
     {
-        // only collectable by player. (use Tags)
-        // when collected...  Destroy.
+
         if (other.tag == "Player")
         {
-
-            //Player playerTest = other.transform.GetComponent<Player>();
-
-            Debug.Log("TRIGGER: Power Up Collected");
-
+            Player playerTest = other.transform.GetComponent<Player>();
+            playerTest.TrippleShotActive();
+            //communicate with player scrip
             Destroy(this.gameObject);
 
         }
