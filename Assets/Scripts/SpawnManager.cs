@@ -9,7 +9,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private float _dropTimer = 5f;
     [SerializeField]
-    private float _dropTimerPowerUp = 6f;
+    private float _dropTimerPowerUp = 9f;
     public float xSpawnOffsetRange = 5f;
     [SerializeField]
     private GameObject _enemyPrefab;
@@ -58,10 +58,11 @@ public class SpawnManager : MonoBehaviour
         while (_stopSpawning == false)
         {
             count += 1;
+            yield return new WaitForSeconds(waitTime);
             GameObject newPowerUp = Instantiate(_powerUpPrefab, PowerUpDropOffset, Quaternion.identity);
             newPowerUp.transform.parent = _enemyContainer.transform;
             Debug.Log("PowerUp Cycle Count: " + count);
-            yield return new WaitForSeconds(waitTime);
+
         }
 
     }

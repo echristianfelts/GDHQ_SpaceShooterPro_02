@@ -324,8 +324,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waitTime: 1
+  _dropTimer: 5
+  _dropTimerPowerUp: 15
   xSpawnOffsetRange: 5
   _enemyPrefab: {fileID: 4764705624836747697, guid: fd38c43f7d8a82343b2e912ec08c8420,
+    type: 3}
+  _powerUpPrefab: {fileID: 2336676358044434942, guid: 6275a7aa20ce1b44a9f16b0078c82096,
     type: 3}
   _enemyContainer: {fileID: 2110100205}
 --- !u!4 &1523913261
@@ -412,7 +416,8 @@ MonoBehaviour:
   _fireRate: 0.2
   _healthPointsPlayer: 100
   _enemyImpactDamage: 20
-  _powerUpTripleShot: 1
+  _powerUpTripleShot: 0
+  _TripleShotLifetime: 5
 --- !u!212 &1671810357
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -678,6 +683,7 @@ MonoBehaviour:
   _healthPointsPlayer: 100
   _enemyImpactDamage: 20
   _powerUpTripleShot: 0
+  _TripleShotLifetime: 5
 --- !u!1 &2110100205
 GameObject:
   m_ObjectHideFlags: 0

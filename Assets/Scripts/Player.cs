@@ -26,15 +26,11 @@ public class Player : MonoBehaviour
     private SpawnManager _spawnManager;
     [SerializeField]
     private bool _powerUpTripleShot = false;
+    [SerializeField]
+    private float _TripleShotLifetime = 15.0f;
 
     //is Tripleshot active?
     //
-
-
-
-
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -69,6 +65,7 @@ public class Player : MonoBehaviour
             {
 
                 FireTripleShot();
+                StartCoroutine(TrippleShotTimer(_TripleShotLifetime));
             }
             else
             {
@@ -76,12 +73,6 @@ public class Player : MonoBehaviour
             }
         }
 
-        // instasiate trippleshot
-
-        //if spacekey pressed...
-        // AND if trippleshot is true...
-        // fire trippleshot.
-        //else fire singleshot.
 
     }
 
@@ -147,4 +138,29 @@ public class Player : MonoBehaviour
         Debug.Log("Player Hitpoints: " + _healthPointsPlayer);
 
     }
+
+    public void TrippleShotActive()
+    {
+        //Trippleshot Active Var becomes true.
+        _powerUpTripleShot = true;
+        //
+        //start power down timer for trippleshot powerup. (IENumerator)
+
+    }
+
+    //IENumerator Trippleshot Powerdown Routine timer.
+    IEnumerator TrippleShotTimer(float killtime)
+    {
+
+        // Wait five seconds then
+        //Set Trippleshot to false.
+        {
+            yield return new WaitForSeconds(killtime);
+            _powerUpTripleShot = false;
+        }
+
+    }
+
+
+
 }
