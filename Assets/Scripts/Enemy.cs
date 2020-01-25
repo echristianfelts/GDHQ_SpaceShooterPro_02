@@ -69,6 +69,11 @@ public class Enemy : MonoBehaviour
             float randomXval = Random.Range(_xRangeMin, _xRangeMax);
             Instantiate(this.gameObject, new Vector3(randomXval, 6.5f, 0f), Quaternion.identity);
             Destroy(other.gameObject);
+            //if (transform.parent != null)
+            //{
+            //    Destroy(transform.parent.gameObject);
+
+            //}
             Destroy(this.gameObject);
 
         }
