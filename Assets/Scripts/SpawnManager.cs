@@ -23,7 +23,7 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(SpawnRoutine(_dropTimer));
+        StartCoroutine(SpawnEnemyRoutine(_dropTimer));
         StartCoroutine(SpawnPowerUpRoutine(_dropTimerPowerUp));
     }
 
@@ -34,7 +34,7 @@ public class SpawnManager : MonoBehaviour
     }
 
 
-    IEnumerator SpawnRoutine(float waitTime)
+    IEnumerator SpawnEnemyRoutine(float waitTime)
     {
         int count = 0;
         Vector3 enemyDropOffset = new Vector3(Random.Range((-1 * xSpawnOffsetRange), xSpawnOffsetRange), 8f, 0);
@@ -50,7 +50,7 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    IEnumerator SpawnPowerUpRoutine(float waitTime)
+    IEnumerator SpawnPowerUpRoutine(float waitTime)  //randomize time
     {
         int count = 0;
         Vector3 PowerUpDropOffset = new Vector3(Random.Range(-5, 5), 8f, 0);

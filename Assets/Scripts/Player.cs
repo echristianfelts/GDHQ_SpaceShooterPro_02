@@ -139,7 +139,7 @@ public class Player : MonoBehaviour
 
     }
 
-    public void TrippleShotActive()
+    public void TripleShotActive()
     {
         //Trippleshot Active Var becomes true.
         _powerUpTripleShot = true;
