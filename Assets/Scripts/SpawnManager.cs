@@ -14,7 +14,7 @@ public class SpawnManager : MonoBehaviour
     [SerializeField]
     private GameObject _enemyPrefab;
     [SerializeField]
-    private GameObject _powerUpPrefab;
+    private GameObject _TripleShotPowerUpPrefab;
     [SerializeField]
     private GameObject _enemyContainer;
     private bool _stopSpawning = false;
@@ -24,7 +24,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnEnemyRoutine(_dropTimer));
-        StartCoroutine(SpawnPowerUpRoutine(_dropTimerPowerUp));
+        StartCoroutine(SpawnPowerUpRoutine());
     }
 
     // Update is called once per frame
@@ -50,17 +50,19 @@ public class SpawnManager : MonoBehaviour
 
     }
 
-    IEnumerator SpawnPowerUpRoutine(float waitTime)  //randomize time
+    IEnumerator SpawnPowerUpRoutine()  //randomize time
     {
         int count = 0;
-        Vector3 PowerUpDropOffset = new Vector3(Random.Range(-5, 5), 8f, 0);
+        //Vector3 PowerUpDropOffset = new Vector3(Random.Range(-5f, 5f), 8f, 0);
+        //randoRange = Random.Range(0f, 5f);
         //Player playerTest = _gameObjectPlayer.GetComponent<Player>();
         while (_stopSpawning == false)
         {
+            Vector3 PowerUpDropOffset = new Vector3(Random.Range(-5f, 5f), 8f, 0);
             count += 1;
-            yield return new WaitForSeconds(waitTime);
-            GameObject newPowerUp = Instantiate(_powerUpPrefab, PowerUpDropOffset, Quaternion.identity);
+            GameObject newPowerUp = Instantiate(_TripleShotPowerUpPrefab, PowerUpDropOffset, Quaternion.identity);
             newPowerUp.transform.parent = _enemyContainer.transform;
+            yield return new WaitForSeconds(Random.Range(10f, 13f));
             Debug.Log("PowerUp Cycle Count: " + count);
 
         }
