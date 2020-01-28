@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _playerSpeed = 5.5f;
+    [SerializeField]
+    private float _playerSpeedBoost = 3.5f;
     public float horizontalInput;
     public float verticalInput;
     [SerializeField]
@@ -28,6 +30,10 @@ public class Player : MonoBehaviour
     private bool _powerUpTripleShot = false;
     [SerializeField]
     private float _TripleShotLifetime = 15.0f;
+    [SerializeField]
+    private bool _powerUpSpeedBoost = false;
+    [SerializeField]
+    private float _SpeedBoostLifetime = 6.0f;
 
     //is Tripleshot active?
     //
@@ -82,7 +88,15 @@ public class Player : MonoBehaviour
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         Vector3 playerVector = new Vector3(horizontalInput, verticalInput, 0);
-        transform.Translate(playerVector * Time.deltaTime * _playerSpeed);
+        if (_powerUpSpeedBoost == true)
+        {
+            transform.Translate(playerVector * Time.deltaTime * (_playerSpeed + _playerSpeedBoost));
+            StartCoroutine(SpeedBoostTimer(_SpeedBoostLifetime));
+        }
+            else
+        {
+            transform.Translate(playerVector * Time.deltaTime * _playerSpeed);
+        }
 
 
 
@@ -111,9 +125,7 @@ public class Player : MonoBehaviour
         Debug.Log("Space Key Pressed Single");
         Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
         _fireTime = Time.time + _fireRate;
-
         Instantiate(_laserPrefab, transform.position + laserSpawnOffset, Quaternion.identity);
-
     }
 
     void FireTripleShot()
@@ -121,9 +133,7 @@ public class Player : MonoBehaviour
         Debug.Log("Space Key Pressed Triple");
         //Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
         _fireTime = Time.time + _fireRate;
-
         Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-
     }
 
     public void Damage()
@@ -136,7 +146,6 @@ public class Player : MonoBehaviour
             Destroy(this.gameObject);
         }
         Debug.Log("Player Hitpoints: " + _healthPointsPlayer);
-
     }
 
     public void TripleShotActive()
@@ -145,22 +154,35 @@ public class Player : MonoBehaviour
         _powerUpTripleShot = true;
         //
         //start power down timer for trippleshot powerup. (IENumerator)
-
     }
 
     //IENumerator Trippleshot Powerdown Routine timer.
     IEnumerator TrippleShotTimer(float killtime)
     {
-
         // Wait five seconds then
         //Set Trippleshot to false.
         {
             yield return new WaitForSeconds(killtime);
             _powerUpTripleShot = false;
         }
-
     }
 
+    public void SpeedBoostActive()
+    {
+        //Trippleshot Active Var becomes true.
+        _powerUpSpeedBoost = true;
+        //
+        //start power down timer for speedboost powerup. (IENumerator)
+    }
 
-
+    //IENumerator SpeedBoost Powerdown Routine timer.
+    IEnumerator SpeedBoostTimer(float killtime)
+    {
+        // Wait five seconds then
+        //Set SpeedBoost to false.
+        {
+            yield return new WaitForSeconds(killtime);
+            _powerUpSpeedBoost = false;
+        }
+    }
 }
