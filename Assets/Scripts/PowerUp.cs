@@ -49,6 +49,7 @@ public class PowerUp : MonoBehaviour
                         break;
                     case 1:
                         Debug.Log("Pick up is Speed.");
+                        player.SpeedBoostActive();
                         break;
                     case 2:
                         Debug.Log("Pick up is Shields.");
