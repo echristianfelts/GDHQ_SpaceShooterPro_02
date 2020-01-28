@@ -13,8 +13,10 @@ public class SpawnManager : MonoBehaviour
     public float xSpawnOffsetRange = 5f;
     [SerializeField]
     private GameObject _enemyPrefab;
+    //[SerializeField]
+    //private GameObject _TripleShotPowerUpPrefab;
     [SerializeField]
-    private GameObject _TripleShotPowerUpPrefab;
+    private GameObject[] _powerUps;
     [SerializeField]
     private GameObject _enemyContainer;
     private bool _stopSpawning = false;
@@ -25,6 +27,7 @@ public class SpawnManager : MonoBehaviour
     {
         StartCoroutine(SpawnEnemyRoutine(_dropTimer));
         StartCoroutine(SpawnPowerUpRoutine());
+
     }
 
     // Update is called once per frame
@@ -60,7 +63,11 @@ public class SpawnManager : MonoBehaviour
         {
             Vector3 PowerUpDropOffset = new Vector3(Random.Range(-5f, 5f), 8f, 0);
             count += 1;
-            GameObject newPowerUp = Instantiate(_TripleShotPowerUpPrefab, PowerUpDropOffset, Quaternion.identity);
+            int randomPowerUp = Random.Range(0, 2);
+
+            //GameObject newPowerUp = Instantiate(_TripleShotPowerUpPrefab, PowerUpDropOffset, Quaternion.identity);
+            GameObject newPowerUp = Instantiate(_powerUps[randomPowerUp], PowerUpDropOffset, Quaternion.identity);
+
             newPowerUp.transform.parent = _enemyContainer.transform;
             yield return new WaitForSeconds(Random.Range(10f, 13f));
             Debug.Log("PowerUp Cycle Count: " + count);
