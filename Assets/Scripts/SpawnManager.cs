@@ -61,15 +61,18 @@ public class SpawnManager : MonoBehaviour
         //Player playerTest = _gameObjectPlayer.GetComponent<Player>();
         while (_stopSpawning == false)
         {
+
+            yield return new WaitForSeconds(Random.Range(10f, 13f));
             Vector3 PowerUpDropOffset = new Vector3(Random.Range(-5f, 5f), 8f, 0);
             count += 1;
-            int randomPowerUp = Random.Range(0, 2);
+
+            int randomPowerUp = Random.Range(0,3);
 
             //GameObject newPowerUp = Instantiate(_TripleShotPowerUpPrefab, PowerUpDropOffset, Quaternion.identity);
             GameObject newPowerUp = Instantiate(_powerUps[randomPowerUp], PowerUpDropOffset, Quaternion.identity);
 
             newPowerUp.transform.parent = _enemyContainer.transform;
-            yield return new WaitForSeconds(Random.Range(10f, 13f));
+
             Debug.Log("PowerUp Cycle Count: " + count);
 
         }
