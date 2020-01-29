@@ -53,6 +53,7 @@ public class PowerUp : MonoBehaviour
                         break;
                     case 2:
                         Debug.Log("Pick up is Shields.");
+                        player.ShieldsActive();
                         break;
 
                     default:

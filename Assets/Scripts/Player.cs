@@ -34,6 +34,9 @@ public class Player : MonoBehaviour
     private bool _powerUpSpeedBoost = false;
     [SerializeField]
     private float _SpeedBoostLifetime = 6.0f;
+    [SerializeField]
+    private bool _powerUpShields = false;
+
 
     //is Tripleshot active?
     //
@@ -138,13 +141,30 @@ public class Player : MonoBehaviour
 
     public void Damage()
     {
-        _healthPointsPlayer -= _enemyImpactDamage;
+
+        // if sheilds is active
+        if (_powerUpShields == true)
+        // do nothing
+        {
+            _powerUpShields = false;
+            this.gameObject.transform.GetChild(0).gameObject.SetActive(false);
+            Debug.Log("<color=red>SHEILDS ARE DOWN..!!!</color>");
+            return;
+            // kill shields
+        }
+
+        else
+
+        { _healthPointsPlayer -= _enemyImpactDamage; }
+
         if (_healthPointsPlayer <= 0)
         {
             //communicate with Spawn Manager
             _spawnManager.OnPlayerDeath(); //Find the Game Object.  Get the componenet;
+            Debug.Log("<color=red>Player has been destroyed..!!!</color>");
             Destroy(this.gameObject);
         }
+        
         Debug.Log("Player Hitpoints: " + _healthPointsPlayer);
     }
 
@@ -184,5 +204,15 @@ public class Player : MonoBehaviour
             yield return new WaitForSeconds(killtime);
             _powerUpSpeedBoost = false;
         }
+    }
+    public void ShieldsActive()
+    {
+        //Trippleshot Active Var becomes true.
+        _powerUpShields = true;
+        this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+        //this.GetComponent<Renderer>().material.color = new Vector4(1, 0, 0, 0);
+        Debug.Log("SHIELDS ARE ACTIVE");
+        //
+        //start power down timer for speedboost powerup. (IENumerator)
     }
 }
