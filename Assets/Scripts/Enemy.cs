@@ -10,6 +10,10 @@ public class Enemy : MonoBehaviour
     private float _xRangeMin = -10f;
     [SerializeField]
     private float _xRangeMax = 10f;
+    [SerializeField]
+    private GameObject _playerGameObject;
+
+    Player playerTest;
     //private float _randomXval = Random.Range(_xRangeMin, _xRangeMax);
 
 
@@ -17,7 +21,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        playerTest = GameObject.FindObjectOfType<Player>();
+        //playerTest = _playerGameObject.transform.GetComponent<Player>();
     }
 
     // Update is called once per frame
@@ -52,12 +57,12 @@ public class Enemy : MonoBehaviour
         {
 
             Player playerTest = other.transform.GetComponent<Player>();
-            //if (playerTest != null) // If that thing desn't NOT exist.  Null Check.
-            //{
+
                 Debug.Log("TAG TRIGGER PLAYER");
                 playerTest.Damage();
+            //put effect spawn here kboom.
                 Destroy(this.gameObject);
-            //}
+
         }
 
         // if other is laser
@@ -69,11 +74,16 @@ public class Enemy : MonoBehaviour
             float randomXval = Random.Range(_xRangeMin, _xRangeMax);
             Instantiate(this.gameObject, new Vector3(randomXval, 6.5f, 0f), Quaternion.identity);
             Destroy(other.gameObject);
-            //if (transform.parent != null)
-            //{
-            //    Destroy(transform.parent.gameObject);
 
-            //}
+            //
+
+            //Player playerTest = _playerGameObject.transform.GetComponent<Player>();
+            playerTest.CalculateScoreEnemy_01();
+
+            
+
+            // Signal Player for 10 points
+
             Destroy(this.gameObject);
 
         }

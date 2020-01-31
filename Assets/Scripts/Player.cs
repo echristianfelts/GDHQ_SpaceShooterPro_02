@@ -37,6 +37,8 @@ public class Player : MonoBehaviour
     [SerializeField]
     private bool _powerUpShields = false;
 
+    public int score = 0;
+
 
     //is Tripleshot active?
     //
@@ -44,6 +46,7 @@ public class Player : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        score = 0;
         // take current pos and assign start pos.
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
@@ -215,4 +218,17 @@ public class Player : MonoBehaviour
         //
         //start power down timer for speedboost powerup. (IENumerator)
     }
+
+    // Add method to add 10 to score..!
+    public void CalculateScoreEnemy_01()
+    {
+        score += 10;
+
+            Debug.Log("<color=yellow>AN ENEMY HAS BEEN KILLED</color>");
+            Debug.Log("<color=yellow>Score :" + score + "</color>");
+
+        // Communicate with UI manager to update the score...
+
+    }
+    // Communicate with UI manager to update the score...
 }
