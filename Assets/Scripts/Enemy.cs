@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private float _xRangeMax = 10f;
     [SerializeField]
     private GameObject _playerGameObject;
+    private int myEnemyScore = 10;
 
     Player playerTest;
     //private float _randomXval = Random.Range(_xRangeMin, _xRangeMax);
@@ -21,8 +22,11 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerTest = GameObject.FindObjectOfType<Player>();
-        //playerTest = _playerGameObject.transform.GetComponent<Player>();
+        playerTest = GameObject.Find("Player").GetComponent<Player>();
+        //playerTest = GameObject.Find("Player");//find the object..?
+        //playerTest = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
+        ////playerTest = GameObject.FindObjectOfType<Player>();  // Gets instance of object in scene (1st instance...)
+        //playerTest = _playerGameObject.transform.GetComponent<Player>();  //Writes DIRECTLY to the prefab...
     }
 
     // Update is called once per frame
@@ -76,9 +80,9 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
 
             //
-
+            //playerTest = GameObject.Find("Player").GetComponent<Player>
             //Player playerTest = _playerGameObject.transform.GetComponent<Player>();
-            playerTest.CalculateScoreEnemy_01();
+            playerTest.CalculateScoreEnemy_01(myEnemyScore);
 
             
 

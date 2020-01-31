@@ -220,9 +220,9 @@ public class Player : MonoBehaviour
     }
 
     // Add method to add 10 to score..!
-    public void CalculateScoreEnemy_01()
+    public void CalculateScoreEnemy_01(int enemyScoreInput)
     {
-        score += 10;
+        score += enemyScoreInput;
 
             Debug.Log("<color=yellow>AN ENEMY HAS BEEN KILLED</color>");
             Debug.Log("<color=yellow>Score :" + score + "</color>");
