@@ -22,9 +22,9 @@ public class Player : MonoBehaviour
     private float _fireRate = 2.0f;
     private float _fireTime = -1f;
     [SerializeField]
-    private float _healthPointsPlayer = 3f;
+    private int _healthPointsPlayer = 3;
     [SerializeField]
-    private float _enemyImpactDamage = 1f;
+    private int _enemyImpactDamage = 1;
     private SpawnManager _spawnManager;
     [SerializeField]
     private bool _powerUpTripleShot = false;
@@ -39,6 +39,10 @@ public class Player : MonoBehaviour
 
     public int score = 0;
 
+    [SerializeField]
+    private UIManger _uiManager;
+
+
 
     //is Tripleshot active?
     //
@@ -50,10 +54,18 @@ public class Player : MonoBehaviour
         // take current pos and assign start pos.
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
+        _uiManager = GameObject.Find("Canvas").GetComponent<UIManger>();
+
 
         if (_spawnManager == null )
         {
             Debug.LogError("Spawn Manager is currently NULL.");
+
+        }
+
+        if (_uiManager == null)
+        {
+            Debug.LogError("UI Manager is currently NULL.");
 
         }
 
@@ -90,7 +102,6 @@ public class Player : MonoBehaviour
 
     void CalculateMovement()
     {
-
         horizontalInput = Input.GetAxis("Horizontal");
         verticalInput = Input.GetAxis("Vertical");
         Vector3 playerVector = new Vector3(horizontalInput, verticalInput, 0);
@@ -159,6 +170,8 @@ public class Player : MonoBehaviour
         else
 
         { _healthPointsPlayer -= _enemyImpactDamage; }
+        _uiManager.UpdateLives(_healthPointsPlayer);
+
 
         if (_healthPointsPlayer <= 0)
         {
@@ -220,9 +233,11 @@ public class Player : MonoBehaviour
     }
 
     // Add method to add 10 to score..!
-    public void CalculateScoreEnemy_01(int enemyScoreInput)
+    public void CalculateScoreEnemy_01(int EnemyPointValue)
     {
-        score += enemyScoreInput;
+        score += EnemyPointValue;
+        _uiManager.UpdateScore(score);
+        //_uiManager.UpdateLives(_healthPointsPlayer);
 
             Debug.Log("<color=yellow>AN ENEMY HAS BEEN KILLED</color>");
             Debug.Log("<color=yellow>Score :" + score + "</color>");

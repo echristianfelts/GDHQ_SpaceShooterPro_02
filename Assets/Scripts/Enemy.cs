@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     private GameObject _playerGameObject;
     private int myEnemyScore = 10;
 
-    Player playerTest;
+    private Player _playerTest;
     //private float _randomXval = Random.Range(_xRangeMin, _xRangeMax);
 
 
@@ -22,7 +22,9 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        playerTest = GameObject.Find("Player").GetComponent<Player>();
+        _playerTest = GameObject.Find("Player").GetComponent<Player>();
+
+
         //playerTest = GameObject.Find("Player");//find the object..?
         //playerTest = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
         ////playerTest = GameObject.FindObjectOfType<Player>();  // Gets instance of object in scene (1st instance...)
@@ -80,10 +82,14 @@ public class Enemy : MonoBehaviour
             Destroy(other.gameObject);
 
             //
-            //playerTest = GameObject.Find("Player").GetComponent<Player>
-            //Player playerTest = _playerGameObject.transform.GetComponent<Player>();
-            playerTest.CalculateScoreEnemy_01(myEnemyScore);
+            //_playerTest = GameObject.Find("Player").GetComponent<Player>
 
+            //Player _playerTest = _playerGameObject.transform.GetComponent<Player>();
+
+            if (_playerGameObject != null)
+            {
+                _playerTest.CalculateScoreEnemy_01(myEnemyScore);
+            }
             
 
             // Signal Player for 10 points
