@@ -11,9 +11,15 @@ public class UIManger : MonoBehaviour
     [SerializeField]
     private GameObject _playerGameObject;
 
+    [SerializeField ]
+    private Image _livesImage; 
+    [SerializeField]
+    private Sprite[] _liveSprites;
+
     // Start is called before the first frame update
     void Start()
     {
+        //_liveSprites[CurrentPlayerLives = 3];
         //Assign text component to the handle.
 
     }
@@ -23,6 +29,13 @@ public class UIManger : MonoBehaviour
     {
         Player playerscore = _playerGameObject.transform.GetComponent<Player>();
         _scoreText.text = "Score: " + playerscore.score;
+    }
+
+    public void UpdateLives(int currentLives)
+    {
+        //display image sprite.
+        //Cahnge sprite image based on current index.
+        _livesImage.sprite = _liveSprites[currentLives];
     }
 }
 
