@@ -22,9 +22,9 @@ public class Player : MonoBehaviour
     private float _fireRate = 2.0f;
     private float _fireTime = -1f;
     [SerializeField]
-    private float _healthPointsPlayer = 100f;
+    private float _healthPointsPlayer = 3f;
     [SerializeField]
-    private float _enemyImpactDamage = 20f;
+    private float _enemyImpactDamage = 1f;
     private SpawnManager _spawnManager;
     [SerializeField]
     private bool _powerUpTripleShot = false;
