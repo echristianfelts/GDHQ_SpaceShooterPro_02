@@ -41,7 +41,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private UIManger _uiManager;
-    private GameObject _gameOverScreen;
+    //private GameObject _gameOverScreen;
 
 
 
@@ -56,11 +56,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManger>();
-        //_gameOverScreen = GameObject.Find("Canvas").get
-            
-            //.gameObject.SetActive(true);
 
-//.transform.GetChild(0).gameObject.SetActive(true);
 
 
         if (_spawnManager == null )
@@ -185,7 +181,7 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath(); 
             Debug.Log("<color=red>Player has been destroyed..!!!</color>");
 
-            _uiManager.ActivateGameOverScreen(true);
+            //_uiManager.ActivateGameOverScreen(true);
             //_gameOverScreen.SetActive(true);
             //.transform.GetChild(0).gameObject.SetActive(true);
 
