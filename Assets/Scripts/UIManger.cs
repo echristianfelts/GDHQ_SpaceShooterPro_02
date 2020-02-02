@@ -45,10 +45,17 @@ public class UIManger : MonoBehaviour
     public void UpdateLives(int currentLives)
     {
 
-        Debug.Log("<color=blue>UPDATE LIVES METHOD ACCESSED...</color>");
+        //Debug.Log("<color=blue>UPDATE LIVES METHOD ACCESSED...</color>");
         //display image sprite.
         //Cahnge sprite image based on current index.
         _livesImage.sprite = _liveSprites[currentLives];
+    }
+
+    public void ActivateGameOverScreen(bool activeGameOverScreen)
+    {
+        Debug.Log("<color=blue>ActivateGameOverScreen METHOD ACCESSED...</color>");
+        this.gameObject.transform.GetChild(2).gameObject.SetActive(activeGameOverScreen);
+
     }
 }
 
