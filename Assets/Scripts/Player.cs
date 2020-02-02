@@ -41,6 +41,7 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     private UIManger _uiManager;
+    private GameObject _gameOverScreen;
 
 
 
@@ -55,6 +56,11 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManger>();
+        //_gameOverScreen = GameObject.Find("Canvas").get
+            
+            //.gameObject.SetActive(true);
+
+//.transform.GetChild(0).gameObject.SetActive(true);
 
 
         if (_spawnManager == null )
@@ -176,8 +182,14 @@ public class Player : MonoBehaviour
         if (_healthPointsPlayer <= 0)
         {
             //communicate with Spawn Manager
-            _spawnManager.OnPlayerDeath(); //Find the Game Object.  Get the componenet;
+            _spawnManager.OnPlayerDeath(); 
             Debug.Log("<color=red>Player has been destroyed..!!!</color>");
+
+            _uiManager.ActivateGameOverScreen(true);
+            //_gameOverScreen.SetActive(true);
+            //.transform.GetChild(0).gameObject.SetActive(true);
+
+
             Destroy(this.gameObject);
         }
         
@@ -211,7 +223,6 @@ public class Player : MonoBehaviour
         //start power down timer for speedboost powerup. (IENumerator)
     }
 
-    //IENumerator SpeedBoost Powerdown Routine timer.
     IEnumerator SpeedBoostTimer(float killtime)
     {
         // Wait five seconds then
@@ -228,22 +239,16 @@ public class Player : MonoBehaviour
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
         //this.GetComponent<Renderer>().material.color = new Vector4(1, 0, 0, 0);
         Debug.Log("SHIELDS ARE ACTIVE");
-        //
         //start power down timer for speedboost powerup. (IENumerator)
     }
 
-    // Add method to add 10 to score..!
     public void CalculateScoreEnemy_01(int EnemyPointValue)
     {
         score += EnemyPointValue;
         _uiManager.UpdateScore(score);
-        //_uiManager.UpdateLives(_healthPointsPlayer);
 
             Debug.Log("<color=yellow>AN ENEMY HAS BEEN KILLED</color>");
             Debug.Log("<color=yellow>Score :" + score + "</color>");
 
-        // Communicate with UI manager to update the score...
-
     }
-    // Communicate with UI manager to update the score...
 }
