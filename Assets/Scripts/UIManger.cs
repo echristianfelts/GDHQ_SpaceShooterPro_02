@@ -91,9 +91,9 @@ public class UIManger : MonoBehaviour
         while (true)
         {
             _gameOverText.text = "GAME OVER";
-            yield return new WaitForSeconds(.02f);
+            yield return new WaitForSeconds(.5f);
             _gameOverText.text = "";
-            yield return new WaitForSeconds(.02f);
+            yield return new WaitForSeconds(.4f);
             _gameOverText.text = "GAME OVER";
         }
 
