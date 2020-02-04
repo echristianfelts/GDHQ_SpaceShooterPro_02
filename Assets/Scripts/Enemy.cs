@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
         {
             Debug.Log("TAG TRIGGER LASER");
             float randomXval = Random.Range(_xRangeMin, _xRangeMax);
-            Instantiate(this.gameObject, new Vector3(randomXval, 6.5f, 0f), Quaternion.identity);
+            Instantiate(this.gameObject, new Vector3(randomXval, 8f, 0f), Quaternion.identity);
             Destroy(other.gameObject);
 
             //
