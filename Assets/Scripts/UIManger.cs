@@ -17,6 +17,10 @@ public class UIManger : MonoBehaviour
     private Sprite[] _liveSprites;
     [SerializeField]
     private Text _gameOverText;
+    [SerializeField]
+    private Text _restartText;
+    [SerializeField]
+    private GameManager _gameManager;
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +30,15 @@ public class UIManger : MonoBehaviour
 
         _scoreText.text = "Score: " + 00;
         _gameOverText.gameObject.SetActive(false);
+        _gameManager = GameObject.Find("Game_Manager:").GetComponent<GameManager>();
+
+        if (_gameManager == null)
+        {
+            Debug.LogError("Game Manager is NULL..!!");
+
+        }
+
+
     }
 
     // Update is called once per frame
@@ -54,15 +67,35 @@ public class UIManger : MonoBehaviour
         _livesImage.sprite = _liveSprites[currentLives];
         if(currentLives == 0)
         {
-            _gameOverText.gameObject.SetActive(true);
-
+            GameOverSequence();
         }
     }
 
-    public void ActivateGameOverScreen(bool activeGameOverScreen)
+    //public void ActivateGameOverScreen(bool activeGameOverScreen)
+    //{
+    //    Debug.Log("<color=blue>ActivateGameOverScreen METHOD ACCESSED...</color>");
+    //    //this.gameObject.transform.GetChild(2).gameObject.SetActive(activeGameOverScreen);
+
+    //}
+
+    void GameOverSequence()
     {
-        Debug.Log("<color=blue>ActivateGameOverScreen METHOD ACCESSED...</color>");
-        //this.gameObject.transform.GetChild(2).gameObject.SetActive(activeGameOverScreen);
+        _gameManager.GameOver();
+        _gameOverText.gameObject.SetActive(true);
+        _restartText.gameObject.SetActive(true);
+        StartCoroutine(GameOverFlickerRoutine());
+    }
+
+    IEnumerator GameOverFlickerRoutine()
+    {
+        while (true)
+        {
+            _gameOverText.text = "GAME OVER";
+            yield return new WaitForSeconds(.02f);
+            _gameOverText.text = "";
+            yield return new WaitForSeconds(.02f);
+            _gameOverText.text = "GAME OVER";
+        }
 
     }
 }
