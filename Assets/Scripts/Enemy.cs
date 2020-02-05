@@ -102,7 +102,8 @@ public class Enemy : MonoBehaviour
 
             Debug.Log("TAG TRIGGER PLAYER");
             StartCoroutine(TriggerEnemy_01Explosion());
-            _speed = 2f;
+            _singleShotAudioSource.PlayOneShot(_explosionAudio, 0.7F);
+            _speed = 1f;
             playerTest.Damage();
                 // set trigger for OnEnemyDeath
                 //Destroy(this.gameObject);
