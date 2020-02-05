@@ -30,7 +30,7 @@ public class AstroidScript : MonoBehaviour
         {
             GameObject newExplosion = Instantiate(_explosionPrefab, this.gameObject.transform.position, Quaternion.identity);
             Debug.Log("<color=blue>ASTEROID/LASER COLISSION CHECK..!</color>");
-            Destroy(this.gameObject);
+            Destroy(this.gameObject, .25f);
             Destroy(other.gameObject);
         }
     }
