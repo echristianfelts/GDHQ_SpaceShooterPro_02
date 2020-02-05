@@ -21,6 +21,9 @@ public class Enemy : MonoBehaviour
 
     private Animator h_Animator;
     private Collider2D h_BoxCollider2d;
+    [SerializeField]
+    private AudioClip _explosionAudio;
+    private AudioSource _singleShotAudioSource;
 
 
 
@@ -29,13 +32,31 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _playerTest = GameObject.Find("Player").GetComponent<Player>();
-
+        _singleShotAudioSource = GameObject.Find("SingleShot_Audio").GetComponent<AudioSource>();
         if (_playerTest == null)
         {
             Debug.LogError("The _playerTest is Null in Enemy");
         }
         h_Animator = this.gameObject.GetComponent<Animator>();
         h_BoxCollider2d = this.gameObject.GetComponent<Collider2D>();
+
+        if (_singleShotAudioSource == null)
+        {
+            Debug.LogError("Single Shot Audio Source is currently NULL. ::ENEMY::");
+
+        }
+
+        if (h_Animator == null)
+        {
+            Debug.LogError("ANIMATOR is currently NULL. ::ENEMY::");
+
+        }
+
+        if (h_BoxCollider2d == null)
+        {
+            Debug.LogError("BOX COLLIDER is currently NULL. ::ENEMY::");
+
+        }
         //      Null-Check Player
         //      Assign Animator Component to itself.
 
@@ -104,6 +125,7 @@ public class Enemy : MonoBehaviour
             }
 
             StartCoroutine(TriggerEnemy_01Explosion());
+            _singleShotAudioSource.PlayOneShot(_explosionAudio, 0.7F);
             _speed = 2.5f;
             // set trigger for OnEnemyDeath
             Debug.Log("<color=blue>ReturnFromIENumerator Log Point.</color>");
