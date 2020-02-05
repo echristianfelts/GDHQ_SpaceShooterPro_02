@@ -532,7 +532,7 @@ GameObject:
   - component: {fileID: 762348951}
   - component: {fileID: 762348952}
   m_Layer: 0
-  m_Name: LaserShot_Audio
+  m_Name: SingleShot_Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -562,10 +562,10 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
-  m_Pitch: 1
+  m_Volume: 0.6
+  m_Pitch: 1.24
   Loop: 0
   Mute: 0
   Spatialize: 0
@@ -691,7 +691,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5b17a0088dcdf924fa92da5af1e1be07, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.508
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -1159,11 +1159,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2107783606364507763, guid: a07fe48da2a813d4c81f2c6919625066,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7032803331438518482, guid: a07fe48da2a813d4c81f2c6919625066,
         type: 3}
       propertyPath: m_Name
@@ -1174,11 +1169,6 @@ PrefabInstance:
       propertyPath: _uiManager
       value: 
       objectReference: {fileID: 2116329822}
-    - target: {fileID: 7032803331438518484, guid: a07fe48da2a813d4c81f2c6919625066,
-        type: 3}
-      propertyPath: _impact
-      value: 
-      objectReference: {fileID: 8300000, guid: 75676f361bdfeaf41a46623e95df3dbc, type: 3}
     - target: {fileID: 7032803331438518486, guid: a07fe48da2a813d4c81f2c6919625066,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1506,7 +1496,9 @@ MonoBehaviour:
   _explosionPrefab: {fileID: 0}
   score: 0
   _uiManager: {fileID: 0}
-  _impact: {fileID: 0}
+  _laserShotAudioClip: {fileID: 0}
+  _explosionAudio: {fileID: 0}
+  _powerUpAudio: {fileID: 0}
 --- !u!1 &2110100205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1718,12 +1710,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: -4067315472103470011, guid: 7c512ffaadde953479ba3e214017160f,
-        type: 3}
-      propertyPath: _explosionPrefab
-      value: 
-      objectReference: {fileID: 2261292209475641160, guid: bb169733b93e8b949a0f601ac6439163,
-        type: 3}
     - target: {fileID: 7109550560980235834, guid: 7c512ffaadde953479ba3e214017160f,
         type: 3}
       propertyPath: m_LocalPosition.x

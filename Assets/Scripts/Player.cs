@@ -45,10 +45,13 @@ public class Player : MonoBehaviour
     private UIManger _uiManager;
     //private GameObject _gameOverScreen;
     [SerializeField]
-    private AudioClip _impact;
+    private AudioClip _laserShotAudioClip;
+    [SerializeField]
+    private AudioClip _explosionAudio;
+    [SerializeField]
+    private AudioClip _powerUpAudio;
 
     private AudioSource _singleShotAudioSource;
-    private AudioSource _tripleShotAudioSource;
     // add variable to store audioclip
 
 
@@ -64,20 +67,26 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManger>();
-        _singleShotAudioSource = GameObject.Find("LaserShot_Audio").GetComponent<AudioSource>();
+        _singleShotAudioSource = GameObject.Find("SingleShot_Audio").GetComponent<AudioSource>();
         _healthPointsPlayer = 3;
 
 
 
         if (_spawnManager == null )
         {
-            Debug.LogError("Spawn Manager is currently NULL.");
+            Debug.LogError("Spawn Manager is currently NULL.  ::PLAYER::");
 
         }
 
         if (_uiManager == null)
         {
             Debug.LogError("UI Manager is currently NULL.");
+
+        }
+
+        if (_singleShotAudioSource == null)
+        {
+            Debug.LogError("Single Shot Audio Source is currently NULL. ::PLAYER::");
 
         }
 
@@ -157,7 +166,7 @@ public class Player : MonoBehaviour
         Instantiate(_laserPrefab, transform.position + laserSpawnOffset, Quaternion.identity);
 
         //play laser audioclip
-        _singleShotAudioSource.PlayOneShot(_impact, 0.7F);
+        _singleShotAudioSource.PlayOneShot(_laserShotAudioClip, 0.7F);
 
 
     }
@@ -168,7 +177,7 @@ public class Player : MonoBehaviour
         //Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
         _fireTime = Time.time + _fireRate;
         Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
-        _singleShotAudioSource.PlayOneShot(_impact, 0.7F);
+        _singleShotAudioSource.PlayOneShot(_laserShotAudioClip, 0.7F);
     }
 
     public void Damage()
@@ -209,7 +218,7 @@ public class Player : MonoBehaviour
             _spawnManager.OnPlayerDeath();
             //this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
             Debug.Log("<color=red>Player has been destroyed..!!!</color>");
-
+            _singleShotAudioSource.PlayOneShot(_explosionAudio, 0.7F);
             //_uiManager.ActivateGameOverScreen(true);
             //_gameOverScreen.SetActive(true);
             //.transform.GetChild(0).gameObject.SetActive(true);
@@ -223,6 +232,7 @@ public class Player : MonoBehaviour
 
     public void TripleShotActive()
     {
+        _singleShotAudioSource.PlayOneShot(_powerUpAudio, 0.7F);
         //Trippleshot Active Var becomes true.
         _powerUpTripleShot = true;
         //
@@ -242,6 +252,7 @@ public class Player : MonoBehaviour
 
     public void SpeedBoostActive()
     {
+        _singleShotAudioSource.PlayOneShot(_powerUpAudio, 0.7F);
         //Trippleshot Active Var becomes true.
         _powerUpSpeedBoost = true;
         //
@@ -259,6 +270,7 @@ public class Player : MonoBehaviour
     }
     public void ShieldsActive()
     {
+        _singleShotAudioSource.PlayOneShot(_powerUpAudio, 0.7F);
         //Trippleshot Active Var becomes true.
         _powerUpShields = true;
         this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
