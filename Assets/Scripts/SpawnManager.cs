@@ -25,6 +25,14 @@ public class SpawnManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //StartCoroutine(SpawnEnemyRoutine(_dropTimer));
+        //StartCoroutine(SpawnPowerUpRoutine());
+
+    }
+
+    public void StartSpawning()
+    {
+
         StartCoroutine(SpawnEnemyRoutine(_dropTimer));
         StartCoroutine(SpawnPowerUpRoutine());
 
@@ -42,6 +50,7 @@ public class SpawnManager : MonoBehaviour
         int count = 0;
         Vector3 enemyDropOffset = new Vector3(Random.Range((-1 * xSpawnOffsetRange), xSpawnOffsetRange), 8f, 0);
         //Player playerTest = _gameObjectPlayer.GetComponent<Player>();
+        yield return new WaitForSeconds(1.5f);
         while (_stopSpawning == false)
         {
             count += 1;
