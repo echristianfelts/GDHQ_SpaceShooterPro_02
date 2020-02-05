@@ -173,6 +173,11 @@ public class Player : MonoBehaviour
         else
 
         { _healthPointsPlayer -= _enemyImpactDamage; }
+
+        //if lives is 2 enable right engine
+        // else if lives is 1, enable left engine.
+
+
         _uiManager.UpdateLives(_healthPointsPlayer);
 
 
