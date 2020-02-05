@@ -29,9 +29,7 @@ public class AstroidScript : MonoBehaviour
         if (other.tag == "Laser")
         {
             GameObject newExplosion = Instantiate(_explosionPrefab, this.gameObject.transform.position, Quaternion.identity);
-            //newExplosion.gameObject.transform = this.transform;
             Debug.Log("<color=blue>ASTEROID/LASER COLISSION CHECK..!</color>");
-            //Instantiate(this.gameObject, new Vector3(Random.Range(_xRangeMin, _xRangeMax), 8f, 0f), Quaternion.identity);
             Destroy(this.gameObject);
             Destroy(other.gameObject);
         }
