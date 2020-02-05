@@ -5,6 +5,8 @@ using UnityEngine;
 public class AstroidScript : MonoBehaviour
 {
     private float _rotSpeed = 1f;
+    [SerializeField]
+    private GameObject _explosionPrefab;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,5 +19,21 @@ public class AstroidScript : MonoBehaviour
         //constatnly rotate astroid on z
         //_rotSpeed += 1;
         transform.Rotate(Vector3.forward * _rotSpeed);
+    }
+
+    //Check for laser collision
+    //instasiate the explosion at the position of the asteroid.
+    //Destroy the explosion aftere it goes off.
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.tag == "Laser")
+        {
+            GameObject newExplosion = Instantiate(_explosionPrefab, this.gameObject.transform.position, Quaternion.identity);
+            //newExplosion.gameObject.transform = this.transform;
+            Debug.Log("<color=blue>ASTEROID/LASER COLISSION CHECK..!</color>");
+            //Instantiate(this.gameObject, new Vector3(Random.Range(_xRangeMin, _xRangeMax), 8f, 0f), Quaternion.identity);
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+        }
     }
 }
