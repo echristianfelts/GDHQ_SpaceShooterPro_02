@@ -7,14 +7,19 @@ public class AstroidScript : MonoBehaviour
     private float _rotSpeed = 1f;
     [SerializeField]
     private GameObject _explosionPrefab;
+    [SerializeField]
+    private SpawnManager _spawnManager;
+
+
     // Start is called before the first frame update
     void Start()
     {
+        _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();
 
     }
 
-    // Update is called once per frame
-    void Update()
+// Update is called once per frame
+void Update()
     {
         //constatnly rotate astroid on z
         //_rotSpeed += 1;
@@ -30,8 +35,11 @@ public class AstroidScript : MonoBehaviour
         {
             GameObject newExplosion = Instantiate(_explosionPrefab, this.gameObject.transform.position, Quaternion.identity);
             Debug.Log("<color=blue>ASTEROID/LASER COLISSION CHECK..!</color>");
-            Destroy(this.gameObject, .25f);
+            _spawnManager.StartSpawning();
             Destroy(other.gameObject);
+            Destroy(this.gameObject, .25f);
+
+
         }
     }
 }
