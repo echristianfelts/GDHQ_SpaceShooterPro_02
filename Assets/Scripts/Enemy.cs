@@ -17,12 +17,22 @@ public class Enemy : MonoBehaviour
     private Player _playerTest;
     //private float _randomXval = Random.Range(_xRangeMin, _xRangeMax);
 
+    //Add Handle to Animator Component...
+
+    private Animator h_Animator;
+    private Collider2D h_BoxCollider2d;
+
+
 
 
     // Start is called before the first frame update
     void Start()
     {
         _playerTest = GameObject.Find("Player").GetComponent<Player>();
+        h_Animator = this.gameObject.GetComponent<Animator>();
+        h_BoxCollider2d = this.gameObject.GetComponent<Collider2D>();
+        //      Null-Check Player
+        //      Assign Animator Component to itself.
 
 
         //playerTest = GameObject.Find("Player");//find the object..?
@@ -66,8 +76,8 @@ public class Enemy : MonoBehaviour
 
                 Debug.Log("TAG TRIGGER PLAYER");
                 playerTest.Damage();
-            //put effect spawn here kboom.
-                Destroy(this.gameObject);
+                // set trigger for OnEnemyDeath
+                //Destroy(this.gameObject);
 
         }
 
@@ -76,28 +86,35 @@ public class Enemy : MonoBehaviour
         // Destroy Self
         if (other.tag == "Laser")
         {
-            Debug.Log("TAG TRIGGER LASER");
-            float randomXval = Random.Range(_xRangeMin, _xRangeMax);
-            Instantiate(this.gameObject, new Vector3(randomXval, 8f, 0f), Quaternion.identity);
+            //Debug.Log("TAG TRIGGER LASER");
+            Instantiate(this.gameObject, new Vector3(Random.Range(_xRangeMin, _xRangeMax), 8f, 0f), Quaternion.identity);
             Destroy(other.gameObject);
-
-            //
-            //_playerTest = GameObject.Find("Player").GetComponent<Player>
-
-            //Player _playerTest = _playerGameObject.transform.GetComponent<Player>();
 
             if (_playerGameObject != null)
             {
                 _playerTest.CalculateScoreEnemy_01(myEnemyScore);
+
             }
-            
 
-            // Signal Player for 10 points
-
-            Destroy(this.gameObject);
+            StartCoroutine(TriggerEnemy_01Explosion());
+            _speed = 3f;
+            // set trigger for OnEnemyDeath
+            Debug.Log("<color=blue>ReturnFromIENumerator Log Point.</color>");
+            //Destroy(this.gameObject);
 
         }
 
+
+    }
+
+    IEnumerator TriggerEnemy_01Explosion()
+    {
+        Debug.Log("<color=red>PreTimer Explosion Log Point.</color>");
+        h_Animator.SetTrigger("OnEnemyDeath");
+        h_BoxCollider2d.enabled = false;
+        yield return new WaitForSeconds(1);
+        Debug.Log("<color=blue>POSTTimer Explosion Log.</color>");
+        Destroy(this.gameObject);
 
     }
 
