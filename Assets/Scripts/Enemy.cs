@@ -29,6 +29,11 @@ public class Enemy : MonoBehaviour
     void Start()
     {
         _playerTest = GameObject.Find("Player").GetComponent<Player>();
+
+        if (_playerTest == null)
+        {
+            Debug.LogError("The _playerTest is Null in Enemy");
+        }
         h_Animator = this.gameObject.GetComponent<Animator>();
         h_BoxCollider2d = this.gameObject.GetComponent<Collider2D>();
         //      Null-Check Player
@@ -74,8 +79,10 @@ public class Enemy : MonoBehaviour
 
             Player playerTest = other.transform.GetComponent<Player>();
 
-                Debug.Log("TAG TRIGGER PLAYER");
-                playerTest.Damage();
+            Debug.Log("TAG TRIGGER PLAYER");
+            StartCoroutine(TriggerEnemy_01Explosion());
+            _speed = 2f;
+            playerTest.Damage();
                 // set trigger for OnEnemyDeath
                 //Destroy(this.gameObject);
 
@@ -97,7 +104,7 @@ public class Enemy : MonoBehaviour
             }
 
             StartCoroutine(TriggerEnemy_01Explosion());
-            _speed = 3f;
+            _speed = 2.5f;
             // set trigger for OnEnemyDeath
             Debug.Log("<color=blue>ReturnFromIENumerator Log Point.</color>");
             //Destroy(this.gameObject);
@@ -112,7 +119,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("<color=red>PreTimer Explosion Log Point.</color>");
         h_Animator.SetTrigger("OnEnemyDeath");
         h_BoxCollider2d.enabled = false;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(1.25f);
         Debug.Log("<color=blue>POSTTimer Explosion Log.</color>");
         Destroy(this.gameObject);
 
