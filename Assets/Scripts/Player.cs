@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     private float _fireRate = 2.0f;
     private float _fireTime = -1f;
     [SerializeField]
-    private int _healthPointsPlayer = 3;
+    private int _healthPointsPlayer = 3; // hit points
     [SerializeField]
     private int _enemyImpactDamage = 1;
     private SpawnManager _spawnManager;
@@ -36,6 +36,8 @@ public class Player : MonoBehaviour
     private float _SpeedBoostLifetime = 6.0f;
     [SerializeField]
     private bool _powerUpShields = false;
+    [SerializeField]
+    private GameObject _explosionPrefab;
 
     public int score = 0;
 
@@ -174,23 +176,31 @@ public class Player : MonoBehaviour
 
         { _healthPointsPlayer -= _enemyImpactDamage; }
 
-        //if lives is 2 enable right engine
-        // else if lives is 1, enable left engine.
+        if (_healthPointsPlayer == 2)
+        {
+            this.gameObject.transform.GetChild(2).gameObject.SetActive(true);
+            //if lives is 2 enable right engine
+        }
 
+        if (_healthPointsPlayer == 1)
+        {
+            this.gameObject.transform.GetChild(3).gameObject.SetActive(true);
+            // else if lives is 1, enable left engine.
+        }
 
         _uiManager.UpdateLives(_healthPointsPlayer);
-
 
         if (_healthPointsPlayer <= 0)
         {
             //communicate with Spawn Manager
-            _spawnManager.OnPlayerDeath(); 
+            _spawnManager.OnPlayerDeath();
+            //this.gameObject.transform.GetChild(2).gameObject.SetActive(false);
             Debug.Log("<color=red>Player has been destroyed..!!!</color>");
 
             //_uiManager.ActivateGameOverScreen(true);
             //_gameOverScreen.SetActive(true);
             //.transform.GetChild(0).gameObject.SetActive(true);
-
+            GameObject newExplosion = Instantiate(_explosionPrefab, this.gameObject.transform.position, Quaternion.identity);
 
             Destroy(this.gameObject);
         }

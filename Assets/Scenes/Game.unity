@@ -1049,6 +1049,7 @@ MonoBehaviour:
   _powerUpSpeedBoost: 0
   _SpeedBoostLifetime: 6
   _powerUpShields: 0
+  _explosionPrefab: {fileID: 0}
   score: 0
   _uiManager: {fileID: 0}
 --- !u!1 &2110100205
