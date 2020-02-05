@@ -44,6 +44,12 @@ public class Player : MonoBehaviour
     [SerializeField]
     private UIManger _uiManager;
     //private GameObject _gameOverScreen;
+    [SerializeField]
+    private AudioClip _impact;
+
+    private AudioSource _singleShotAudioSource;
+    private AudioSource _tripleShotAudioSource;
+    // add variable to store audioclip
 
 
 
@@ -58,6 +64,7 @@ public class Player : MonoBehaviour
         transform.position = new Vector3(0, 0, 0);
         _spawnManager = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
         _uiManager = GameObject.Find("Canvas").GetComponent<UIManger>();
+        _singleShotAudioSource = GameObject.Find("LaserShot_Audio").GetComponent<AudioSource>();
         _healthPointsPlayer = 3;
 
 
@@ -148,6 +155,11 @@ public class Player : MonoBehaviour
         Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
         _fireTime = Time.time + _fireRate;
         Instantiate(_laserPrefab, transform.position + laserSpawnOffset, Quaternion.identity);
+
+        //play laser audioclip
+        _singleShotAudioSource.PlayOneShot(_impact, 0.7F);
+
+
     }
 
     void FireTripleShot()
@@ -156,6 +168,7 @@ public class Player : MonoBehaviour
         //Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
         _fireTime = Time.time + _fireRate;
         Instantiate(_tripleShotPrefab, transform.position, Quaternion.identity);
+        _singleShotAudioSource.PlayOneShot(_impact, 0.7F);
     }
 
     public void Damage()
