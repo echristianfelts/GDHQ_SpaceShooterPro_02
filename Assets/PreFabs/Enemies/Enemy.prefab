@@ -51,6 +51,8 @@ MonoBehaviour:
   _xRangeMax: 10
   _playerGameObject: {fileID: 7032803331438518482, guid: a07fe48da2a813d4c81f2c6919625066,
     type: 3}
+  _enemyLaserPrefab: {fileID: 5884601394090175724, guid: be92692f756ade64a975b9c10c9f9a34,
+    type: 3}
   _explosionAudio: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
 --- !u!212 &5551852639129250501
 SpriteRenderer:
