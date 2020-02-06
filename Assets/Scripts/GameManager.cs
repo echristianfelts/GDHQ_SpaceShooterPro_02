@@ -17,13 +17,18 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // if the r key was pressed...
+
         if (Input.GetKeyDown(KeyCode.R) && _isGameOver == true)
         {
             SceneManager.LoadScene(1);  //Current Game Scene 
         }
-        //restartt the current scene.
 
+        //if the esc key is pressed, need quit aplication;
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
     }
 
 
