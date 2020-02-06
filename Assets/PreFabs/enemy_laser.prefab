@@ -10,10 +10,13 @@ GameObject:
   m_Component:
   - component: {fileID: 8587370375599351540}
   - component: {fileID: 6559532622149371819}
+  - component: {fileID: 6927695036350436844}
   - component: {fileID: -2108256805291256937}
+  - component: {fileID: 7056556507859536799}
+  - component: {fileID: 2198734899337820298}
   m_Layer: 0
   m_Name: enemy_laser
-  m_TagString: Untagged
+  m_TagString: EnemyLaser
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -82,6 +85,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &6927695036350436844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884601394090175724}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 061fac2efaa62ca45b33206263a40e15, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-2108256805291256937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,3 +110,53 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _speed: -12
+  _explosionPrefab: {fileID: 3028706345968580216, guid: 9a9060e76725ef34b8ea398626c56917,
+    type: 3}
+  _explosionAudio: {fileID: 8300000, guid: a885c043fab7e46438bba03ba9dab6bc, type: 3}
+--- !u!61 &7056556507859536799
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884601394090175724}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0064276103, y: 0.025716424}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1, y: 3}
+    newSize: {x: 1, y: 3}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.08708061, y: 2.74284}
+  m_EdgeRadius: 0
+--- !u!50 &2198734899337820298
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5884601394090175724}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 0
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

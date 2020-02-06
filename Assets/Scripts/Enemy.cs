@@ -27,7 +27,9 @@ public class Enemy : MonoBehaviour
     private AudioClip _explosionAudio;
     private AudioSource _singleShotAudioSource;
     private float _fireTime;
-    
+    private float _fireDeathTimer = 0f;
+    private float _fireFlag = 0f;
+
     //Set FIRE FLAG
 
 
@@ -37,6 +39,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _fireDeathTimer = (Random.Range(0f, 3f));
         _playerTest = GameObject.Find("Player").GetComponent<Player>();
         _singleShotAudioSource = GameObject.Find("SingleShot_Audio").GetComponent<AudioSource>();
         h_Animator = this.gameObject.GetComponent<Animator>();
@@ -65,7 +68,7 @@ public class Enemy : MonoBehaviour
 
         }
 
-        _fireTime = Random.Range(0.5f, 1.5f);
+        _fireTime = .1f;
  }
 
     // Update is called once per frame
@@ -73,10 +76,11 @@ public class Enemy : MonoBehaviour
     {
         //  if time > timer then drop bullet
 
-        if (Time.time > _fireTime)
+        if (Time.time > _fireTime && _fireFlag == 0)
         {
 
             FireEnemyLaser();
+
         }
         //move enemy down @ 4 meters per second.
         transform.Translate(Vector3.down * Time.deltaTime * (_speed + (Random.Range(-3f, 0f))));
@@ -89,9 +93,6 @@ public class Enemy : MonoBehaviour
             float randomXval = Random.Range(_xRangeMin, _xRangeMax);
             transform.position = new Vector3(randomXval, 8f, 0);
         }
-        //randomize respawn position.
-
-        // Detect Collison
 
 
     }
@@ -107,20 +108,14 @@ public class Enemy : MonoBehaviour
         {
 
             Player playerTest = other.transform.GetComponent<Player>();
-
             Debug.Log("TAG TRIGGER PLAYER");
             StartCoroutine(TriggerEnemy_01Explosion());
             _singleShotAudioSource.PlayOneShot(_explosionAudio, 0.7F);
             _speed = 1f;
             playerTest.Damage();
-                // set trigger for OnEnemyDeath
-                //Destroy(this.gameObject);
 
         }
 
-        // if other is laser
-        // Destroy laser
-        // Destroy Self
         if (other.tag == "Laser")
         {
             //Debug.Log("TAG TRIGGER LASER");
@@ -138,8 +133,10 @@ public class Enemy : MonoBehaviour
             _speed = 2.5f;
             // set trigger for OnEnemyDeath
             Debug.Log("<color=blue>ReturnFromIENumerator Log Point.</color>");
-            //Destroy(this.gameObject);
 
+            _fireDeathTimer = Time.time;
+
+            StartCoroutine(TriggerEnemy_Off());
         }
 
 
@@ -150,6 +147,7 @@ public class Enemy : MonoBehaviour
         Debug.Log("<color=red>PreTimer Explosion Log Point.</color>");
         h_Animator.SetTrigger("OnEnemyDeath");
         h_BoxCollider2d.enabled = false;
+        _fireFlag += 1;
         yield return new WaitForSeconds(1.25f);
         Debug.Log("<color=blue>POSTTimer Explosion Log.</color>");
         Destroy(this.gameObject);
@@ -162,18 +160,17 @@ public class Enemy : MonoBehaviour
         _fireTime = Time.time + _fireTime + (Random.Range(0f, 3f));
         Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
         //play laser audioclip
-        //_singleShotAudioSource.PlayOneShot(_laserShotAudioClip, 0.7F);
     }
 
-    //IEnumerator EnemyLaserTimer()
-    //{
-    //    //Debug.Log("<color=red>PreTimer Explosion Log Point.</color>");
-    //    //h_Animator.SetTrigger("OnEnemyDeath");
-    //    //h_BoxCollider2d.enabled = false;
-    //    yield return new WaitForSeconds(5f);
-    //    Debug.Log("<color=blue>POSTTimer Explosion Log.</color>");
-    //    //Destroy(this.gameObject);
+    IEnumerator TriggerEnemy_Off()
+    {
+        if (Time.time > _fireDeathTimer + 0.1f)
+        {
+            Destroy(this.gameObject);
+        }
+        yield return new WaitForSeconds(1.1f);
 
-    //}
+    }
+
 
 }
