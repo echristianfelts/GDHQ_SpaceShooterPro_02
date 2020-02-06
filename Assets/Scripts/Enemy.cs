@@ -12,8 +12,6 @@ public class Enemy : MonoBehaviour
     private float _xRangeMax = 10f;
     [SerializeField]
     private GameObject _playerGameObject;
-    [SerializeField]
-    private GameObject _enemyLaserPrefab;
     private int myEnemyScore = 10;
 
     private Player _playerTest;
@@ -26,10 +24,6 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     private AudioClip _explosionAudio;
     private AudioSource _singleShotAudioSource;
-    private float _fireTime;
-    
-    //Set FIRE FLAG
-
 
 
 
@@ -39,13 +33,12 @@ public class Enemy : MonoBehaviour
     {
         _playerTest = GameObject.Find("Player").GetComponent<Player>();
         _singleShotAudioSource = GameObject.Find("SingleShot_Audio").GetComponent<AudioSource>();
-        h_Animator = this.gameObject.GetComponent<Animator>();
-        h_BoxCollider2d = this.gameObject.GetComponent<Collider2D>();
-
         if (_playerTest == null)
         {
             Debug.LogError("The _playerTest is Null in Enemy");
         }
+        h_Animator = this.gameObject.GetComponent<Animator>();
+        h_BoxCollider2d = this.gameObject.GetComponent<Collider2D>();
 
         if (_singleShotAudioSource == null)
         {
@@ -64,22 +57,21 @@ public class Enemy : MonoBehaviour
             Debug.LogError("BOX COLLIDER is currently NULL. ::ENEMY::");
 
         }
+        //      Null-Check Player
+        //      Assign Animator Component to itself.
 
-        _fireTime = Random.Range(0.5f, 1.5f);
- }
+
+        //playerTest = GameObject.Find("Player");//find the object..?
+        //playerTest = GameObject.Find("Spawn_Manager").GetComponent<SpawnManager>();//find the object.  Get the component.
+        ////playerTest = GameObject.FindObjectOfType<Player>();  // Gets instance of object in scene (1st instance...)
+        //playerTest = _playerGameObject.transform.GetComponent<Player>();  //Writes DIRECTLY to the prefab...
+    }
 
     // Update is called once per frame
     void Update()
     {
-        //  if time > timer then drop bullet
-
-        if (Time.time > _fireTime)
-        {
-
-            FireEnemyLaser();
-        }
         //move enemy down @ 4 meters per second.
-        transform.Translate(Vector3.down * Time.deltaTime * (_speed + (Random.Range(-3f, 0f))));
+        transform.Translate(Vector3.down * Time.deltaTime * _speed);
 
         //if @ bottom of screen
         //respawn at top
@@ -155,25 +147,5 @@ public class Enemy : MonoBehaviour
         Destroy(this.gameObject);
 
     }
-
-    void FireEnemyLaser()
-    {
-        //Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
-        _fireTime = Time.time + _fireTime + (Random.Range(0f, 3f));
-        Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
-        //play laser audioclip
-        //_singleShotAudioSource.PlayOneShot(_laserShotAudioClip, 0.7F);
-    }
-
-    //IEnumerator EnemyLaserTimer()
-    //{
-    //    //Debug.Log("<color=red>PreTimer Explosion Log Point.</color>");
-    //    //h_Animator.SetTrigger("OnEnemyDeath");
-    //    //h_BoxCollider2d.enabled = false;
-    //    yield return new WaitForSeconds(5f);
-    //    Debug.Log("<color=blue>POSTTimer Explosion Log.</color>");
-    //    //Destroy(this.gameObject);
-
-    //}
 
 }
