@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AstroidScript : MonoBehaviour
 {
-    private float _rotSpeed = 1f;
+    private float _rotSpeed = 0.03f;
     [SerializeField]
     private GameObject _explosionPrefab;
     [SerializeField]

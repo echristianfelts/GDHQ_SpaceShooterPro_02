@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _fireDeathTimer = (Random.Range(0f, 3f));
+        _fireDeathTimer = (Random.Range(2f, 5f));
         _playerTest = GameObject.Find("Player").GetComponent<Player>();
         _singleShotAudioSource = GameObject.Find("SingleShot_Audio").GetComponent<AudioSource>();
         h_Animator = this.gameObject.GetComponent<Animator>();
@@ -68,7 +68,7 @@ public class Enemy : MonoBehaviour
 
         }
 
-        _fireTime = .1f;
+        _fireTime = (Random.Range(1f, 2f));
  }
 
     // Update is called once per frame
@@ -157,7 +157,7 @@ public class Enemy : MonoBehaviour
     void FireEnemyLaser()
     {
         //Vector3 laserSpawnOffset = new Vector3(_laserSpawnOffsetX, _laserSpawnOffsetY, 0);
-        _fireTime = Time.time + _fireTime + (Random.Range(0f, 3f));
+        _fireTime = Time.time + _fireTime + (Random.Range(1f, 3f));
         Instantiate(_enemyLaserPrefab, transform.position, Quaternion.identity);
         //play laser audioclip
     }
