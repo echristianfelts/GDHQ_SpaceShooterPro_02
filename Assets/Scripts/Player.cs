@@ -137,6 +137,7 @@ public class Player : MonoBehaviour
         }
 
 
+        // Setting Boundries
 
         if (transform.position.y > 0)
         {
