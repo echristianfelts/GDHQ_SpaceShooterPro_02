@@ -104,6 +104,7 @@ public class Enemy : MonoBehaviour
         // if other is Player
         // Damage Player
         // Destroy Self
+
         if (other.tag == "Player")
         {
 
